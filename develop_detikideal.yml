@@ -1,0 +1,19 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm install
+        - npm install -g @quasar/cli
+    #  - npm audit fix
+    # IMPORTANT - Please verify your build commands
+    build:
+      commands: 
+        - quasar build
+  artifacts:
+    baseDirectory: dist/spa
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
