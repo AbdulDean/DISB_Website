@@ -1,0 +1,36 @@
+# Node.js with Vue
+# Build a Node.js project that uses Vue.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Build
+  displayName: 'Build Job'
+  
+  steps:
+  - task: UseNode@1
+    inputs:
+      version: '12.x'
+      checkLatest: true
+
+  - script: |
+      npm install
+      npm install -g @quasar/cli
+    displayName: 'Install Dependencies'
+
+  - script: |
+      quasar build
+    displayName: 'Build'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: 'dist/spa'
+      artifactName: 'drop'
+      publishLocation: 'Container'
+
