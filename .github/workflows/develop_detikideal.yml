@@ -25,6 +25,6 @@ jobs:
 
   - task: PublishBuildArtifacts@1
     inputs:
-      pathtoPublish: 'dist/spa'
+      pathtoPublish: 'fin/portal'
       artifactName: 'drop'
       publishLocation: 'Container'
