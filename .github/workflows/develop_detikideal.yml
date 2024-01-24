@@ -1,0 +1,30 @@
+trigger:
+- '*'
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+jobs:
+- job: Build
+  displayName: 'Build Job'
+  
+  steps:
+  - task: UseNode@1
+    inputs:
+      version: '12.x'
+      checkLatest: true
+
+  - script: |
+      npm install
+      npm install -g @quasar/cli
+    displayName: 'Install Dependencies'
+
+  - script: |
+      quasar build
+    displayName: 'Build'
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: 'dist/spa'
+      artifactName: 'drop'
+      publishLocation: 'Container'
