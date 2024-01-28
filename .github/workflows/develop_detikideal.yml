@@ -37,7 +37,7 @@ jobs:
     needs: build
     environment:
       name: 'Production'
-      URL: $  # Replace with your Azure Web App URL
+      url: $
 
     steps:
       - name: Download artifact from build job
